@@ -1,7 +1,7 @@
 
 from sqlalchemy import Column, Integer, MetaData, String, Enum, DateTime, ForeignKey, Text
 
-from app.db.database import Base
+from db.database import Base
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
