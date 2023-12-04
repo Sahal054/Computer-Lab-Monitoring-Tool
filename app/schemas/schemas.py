@@ -1,6 +1,6 @@
 from enum import Enum
 from pydantic import BaseModel
-
+from datetime import datetime
 
 
 class User(BaseModel):
@@ -21,14 +21,14 @@ class ComputerInfo(BaseModel):
     Lab_ID: int
     Computer_Name: str
     Computer_Status: str = Enum('available', 'in_use')
-    Last_Heartbeat: str
+    Last_Heartbeat: datetime
 
 class NetworkInfo(BaseModel):
     Network_ID: int
     Lab_ID: int
     Network_Name: str
     Network_Status: str = Enum('up', 'down')
-    Last_Check: str
+    Last_Check: datetime
 
 class SoftwareInfo(BaseModel):
     Software_ID: int

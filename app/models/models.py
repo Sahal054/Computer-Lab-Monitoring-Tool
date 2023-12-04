@@ -1,6 +1,6 @@
 
 from sqlalchemy import Column, Integer, MetaData, String, Enum, DateTime, ForeignKey, Text
-
+from datetime import datetime
 from db.database import Base
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -19,7 +19,7 @@ class ComputerInfo(Base):
     Lab_ID: int = Column(Integer, ForeignKey(LabInfo.Lab_ID), nullable=False)
     Computer_Name: str = Column(String(255), nullable=False)
     Computer_Status: str = Column(Enum('available', 'in_use'), nullable=False)
-    Last_Heartbeat: DateTime = Column(DateTime)
+    Last_Heartbeat: DateTime = Column(DateTime,default=datetime.utcnow)
 
 class NetworkInfo(Base):
     __tablename__ = "NetworkInfo"    
@@ -27,7 +27,7 @@ class NetworkInfo(Base):
     Lab_ID: int = Column(Integer, ForeignKey(LabInfo.Lab_ID), nullable=False)
     Network_Name: str = Column(String(255), nullable=False)
     Network_Status: str = Column(Enum('up', 'down'), nullable=False)
-    Last_Check: DateTime = Column(DateTime)
+    Last_Check: DateTime = Column(DateTime,default=datetime.utcnow)
 
 class SoftwareInfo(Base):
     __tablename__ = "SoftwareInfo" 
