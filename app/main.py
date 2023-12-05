@@ -74,18 +74,12 @@ async def get_computer(lab_id: int, computer_id: int, db: Session = Depends(get_
 
 
 # endpoint to get network information for a lab
-<<<<<<< HEAD
-# endpoint to get network information for a lab
-@app.get("/labs/{lab_id}/network",response_class=HTMLResponse)
-async def get_network_info(request: Request,lab_id: int, db: Session = Depends(get_db)):
-=======
 @app.get("/labs/{lab_id}/network", response_class=HTMLResponse)
 async def get_network_info(lab_id: int, db: Session = Depends(get_db)):
->>>>>>> 50e08ef6f67864496617fd88b1982daa93cc007a
     network_info = db.query(models.NetworkInfo).filter(models.NetworkInfo.Lab_ID == lab_id).first()
     if not network_info:
         raise HTTPException(status_code=404, detail="Network information not found")
-    return templates.TemplateResponse("network.html", {"request": request, "network_data": network_info})
+    return network_info
 
 
 # endpoint to get software information for a specific computer
