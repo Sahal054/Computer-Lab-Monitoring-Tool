@@ -4,9 +4,9 @@ from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from .db.database import SessionLocal
-from app.models import models
-from app.schemas import schemas
+from db.database import SessionLocal
+from models import models
+from schemas import schemas
 from fastapi.staticfiles import StaticFiles
 
 # Create FastAPI instance
