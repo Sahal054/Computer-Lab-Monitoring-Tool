@@ -53,7 +53,10 @@
                 <td>{{ lab.Lab_Name }}</td>
                 <td>{{ lab.Lab_Location }}</td>
                 <td>{{ lab.Lab_Capacity }}</td>
-                <td><button onclick="">Choose</button></td>
+                <!--<td><button onclick="">Choose</button></td>-->
+                <td>
+                    <button onclick="chooseLab('{{ lab.Lab_ID }}')">Choose</button>
+                </td>
             </tr>
         {% endfor %}
     </tbody>
@@ -62,8 +65,8 @@
 <script>
     // Function to handle lab selection
     function chooseLab(labId) {
-        // Add your logic to handle lab selection, for example, redirect to another page
-        alert("Lab " + labId + " chosen!");
+        // Redirect to the FastAPI endpoint with the chosen Lab_ID
+        window.location.href = `http://127.0.0.1:8000/labs/${labId}`;
     }
 </script>
 

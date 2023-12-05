@@ -46,12 +46,12 @@ async def get_labs(request: Request, db: Session = Depends(get_db)):
 # ... your database setup and model definitions ...
 
 # endpoint to get a specific lab
-@app.get("/labs/{lab_id}", response_model=schemas.LabInfo)
-async def get_lab(lab_id: int, db: Session = Depends(get_db)):
+@app.get("/labs/{lab_id}",response_class=HTMLResponse)
+async def get_lab(request: Request,lab_id: int, db: Session = Depends(get_db)):
     lab = db.query(models.LabInfo).filter(models.LabInfo.Lab_ID == lab_id).first()
     if not lab:
         raise HTTPException(status_code=404, detail="Lab not found")
-    return lab
+    return templates.TemplateResponse("labChosen.html", {"request": request, "lab": lab})
 
 
 # endpoint to get all computers in a lab(error here)

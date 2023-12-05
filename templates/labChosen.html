@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Information</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lab Information</h1>
+
+<!-- Display lab details in a table -->
+<table>
+    <tbody>
+        <tr>
+            <th>Lab ID</th>
+            <td>{{ lab.Lab_ID }}</td>
+        </tr>
+        <tr>
+            <th>Lab Name</th>
+            <td>{{ lab.Lab_Name }}</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
