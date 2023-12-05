@@ -74,7 +74,7 @@ async def get_computer(lab_id: int, computer_id: int, db: Session = Depends(get_
 
 
 # endpoint to get network information for a lab
-@app.get("/labs/{lab_id}/network", response_model=schemas.NetworkInfo)
+@app.get("/labs/{lab_id}/network", response_class=HTMLResponse)
 async def get_network_info(lab_id: int, db: Session = Depends(get_db)):
     network_info = db.query(models.NetworkInfo).filter(models.NetworkInfo.Lab_ID == lab_id).first()
     if not network_info:
