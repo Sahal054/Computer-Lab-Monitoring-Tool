@@ -1,4 +1,4 @@
-from ast import List
+
 import datetime
 from fastapi import FastAPI , Depends, HTTPException
 from db.database import SessionLocal, engine
@@ -21,11 +21,12 @@ async def get_db():
         db.close()
 
 
-# ellam lab (error here )
-@app.get("/labs", response_model=schemas.LabInfo)
+# ellam lab 
+@app.get("/labs")
 async def get_labs(db: Session = Depends(get_db)):
-    labs = db.query(models.LabInfo).all()
-    return labs
+    lab =db.query(models.LabInfo).all()
+    return  lab
+    
 
 
 
@@ -39,7 +40,7 @@ async def get_lab(lab_id: int, db: Session = Depends(get_db)):
 
 
 # endpoint to get all computers in a lab(error here)
-@app.get("/labs/{lab_id}/computers", response_model=schemas.ComputerInfo)
+@app.get("/labs/{lab_id}/computers")
 async def get_computers(lab_id: int, db: Session = Depends(get_db)):
     computers = db.query(models.ComputerInfo).filter(models.ComputerInfo.Lab_ID == lab_id).all()
     return computers
