@@ -46,24 +46,26 @@ async def get_labs(request: Request, db: Session = Depends(get_db)):
 # ... your database setup and model definitions ...
 
 # endpoint to get a specific lab
-@app.get("/labs/{lab_id}", response_model=schemas.LabInfo)
-async def get_lab(lab_id: int, db: Session = Depends(get_db)):
+@app.get("/labs/{lab_id}",response_class=HTMLResponse)
+async def get_lab(request: Request,lab_id: int, db: Session = Depends(get_db)):
     lab = db.query(models.LabInfo).filter(models.LabInfo.Lab_ID == lab_id).first()
     if not lab:
         raise HTTPException(status_code=404, detail="Lab not found")
-    return lab
+    return templates.TemplateResponse("labChosen.html", {"request": request, "lab": lab})
 
 
 # endpoint to get all computers in a lab(error here)
-@app.get("/labs/{lab_id}/computers", response_model=schemas.ComputerInfo)
-async def get_computers(lab_id: int, db: Session = Depends(get_db)):
+@app.get("/labs/{lab_id}/computers",response_class=HTMLResponse )
+async def get_computers(request: Request,lab_id: int, db: Session = Depends(get_db)):
     computers = db.query(models.ComputerInfo).filter(models.ComputerInfo.Lab_ID == lab_id).all()
-    return computers
+    if not computers:
+         raise HTTPException(status_code=404, detail="Lab not found")
+    return templates.TemplateResponse("labComputers.html", {"request": request, "computers": computers})
 
 
 # endpoint to get a specific computer in a lab
 @app.get("/labs/{lab_id}/computers/{computer_id}", response_model=schemas.ComputerInfo)
-async def get_computer(lab_id: int, computer_id: int, db: Session = Depends(get_db)):
+async def get_computer(request: Request,lab_id: int, computer_id: int, db: Session = Depends(get_db)):
     computer = db.query(models.ComputerInfo).filter(
         models.ComputerInfo.Lab_ID == lab_id, models.ComputerInfo.Computer_ID == computer_id
     ).first()
@@ -74,12 +76,13 @@ async def get_computer(lab_id: int, computer_id: int, db: Session = Depends(get_
 
 
 # endpoint to get network information for a lab
-@app.get("/labs/{lab_id}/network", response_model=schemas.NetworkInfo)
-async def get_network_info(lab_id: int, db: Session = Depends(get_db)):
+@app.get("/labs/{lab_id}/network",response_class=HTMLResponse )
+async def get_network_info(request: Request,lab_id: int, db: Session = Depends(get_db)):
     network_info = db.query(models.NetworkInfo).filter(models.NetworkInfo.Lab_ID == lab_id).first()
     if not network_info:
         raise HTTPException(status_code=404, detail="Network information not found")
-    return network_info
+    return templates.TemplateResponse("network.html", {"request": request, "network_data":network_info })
+
 
 
 # endpoint to get software information for a specific computer

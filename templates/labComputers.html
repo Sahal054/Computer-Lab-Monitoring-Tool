@@ -12,15 +12,13 @@
         }
 
         th, td {
-            border: 1px solid rgb(189, 169, 240);
+            border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
-            font-family:  sans-serif;
         }
 
         th {
             background-color: #f2f2f2;
-            font-family:  sans-serif;
         }
 
         button {
@@ -49,12 +47,12 @@
         </tr>
     </thead>
     <tbody>
-        {% for lab in labs %}
+        {% for computer in computers %}
             <tr>
-                <td>{{ lab.Lab_ID }}</td>
-                <td>{{ lab.Lab_Name }}</td>
-                <td>{{ lab.Lab_Location }}</td>
-                <td>{{ lab.Lab_Capacity }}</td>
+                <td>{{ computers.Computer_ID }}</td>
+                <td>{{ computers. Computer_Name }}</td>
+                <td>{{ computers.Computer_Status }}</td>
+                <td>{{ computers.Last_Heartbeat }}</td>
                 <!--<td><button onclick="">Choose</button></td>-->
                 <td>
                     <button onclick="chooseLab('{{ lab.Lab_ID }}')">Choose</button>
