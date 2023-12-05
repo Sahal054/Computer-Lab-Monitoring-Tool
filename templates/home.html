@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Information</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9; /* Nude background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+        h1 {
+            text-align: center;
+            color: #6e6e6e; /* Text color */
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-image: linear-gradient(to right, #8e54e9, #4776e6); /* Purple gradient */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-image 0.3s ease-in-out; /* Smooth transition */
+            display: block;
+            margin: 0 auto;
+        }
+        button:hover {
+            background-image: linear-gradient(to right, #4776e6, #8e54e9); /* Gradient on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>LAB INFORMATION</h1>
+
+        <form action="http://127.0.0.1:8000/labs/" method="get">
+            <button type="submit">Get Lab Information</button>
+        </form>
+    </div>
+
+</body>
+</html>

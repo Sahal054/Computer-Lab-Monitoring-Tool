@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABS</title>
+</head>
+<body>
+
+<h1>Lab Details</h1>
+
+<!-- Display lab details -->
+<ul>
+    {% for lab in labs %}
+        <li>
+            <strong>Lab ID:</strong> {{ lab.Lab_ID }}<br>
+            <strong>Lab Name:</strong> {{ lab.Lab_Name }}<br>
+            <strong>Location:</strong> {{ lab.Lab_Location }}<br>
+            <strong>Capacity:</strong> {{ lab.Lab_Capacity }}
+        </li>
+        <br>
+    {% endfor %}
+</ul>
+</body>
+</html>

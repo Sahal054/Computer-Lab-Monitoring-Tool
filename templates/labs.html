@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LABS</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lab Details</h1>
+
+<!-- Display lab details in a table -->
+<table>
+    <thead>
+        <tr>
+            <th>Lab ID</th>
+            <th>Lab Name</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lab in labs %}
+            <tr>
+                <td>{{ lab.Lab_ID }}</td>
+                <td>{{ lab.Lab_Name }}</td>
+                <td>{{ lab.Lab_Location }}</td>
+                <td>{{ lab.Lab_Capacity }}</td>
+                <td><button onclick="">Choose</button></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    // Function to handle lab selection
+    function chooseLab(labId) {
+        // Add your logic to handle lab selection, for example, redirect to another page
+        alert("Lab " + labId + " chosen!");
+    }
+</script>
+
+</body>
+</html>

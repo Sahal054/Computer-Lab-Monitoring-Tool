@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+</head>
+<body>
+
+<h1>Lab Details</h1>
+
+<!-- Button to trigger the lab details request -->
+<button onclick="getLabDetails()">Get Lab Details</button>
+
+<!-- Container to display the lab details -->
+<div id="labDetails"></div>
+
+<script>
+    // Function to fetch lab details and display them
+    async function getLabDetails() {
+        try {
+            const response = await fetch('/labs');
+            const data = await response.json();
+            
+            // Display lab details in the labDetails div
+            document.getElementById('labDetails').innerHTML = JSON.stringify(data);
+        } catch (error) {
+            console.error('Error fetching lab details:', error);
+        }
+    }
+</script>
+
+</body>
+</html>
