@@ -76,13 +76,8 @@ async def get_computer(request: Request,lab_id: int, computer_id: int, db: Sessi
 
 
 # endpoint to get network information for a lab
-<<<<<<< HEAD
 @app.get("/labs/{lab_id}/network",response_class=HTMLResponse )
 async def get_network_info(request: Request,lab_id: int, db: Session = Depends(get_db)):
-=======
-@app.get("/labs/{lab_id}/network", response_class=HTMLResponse)
-async def get_network_info(lab_id: int, db: Session = Depends(get_db)):
->>>>>>> 5e6e721cef6b21378221da1c2eb83e5fa7a031d1
     network_info = db.query(models.NetworkInfo).filter(models.NetworkInfo.Lab_ID == lab_id).first()
     if not network_info:
         raise HTTPException(status_code=404, detail="Network information not found")
@@ -246,4 +241,7 @@ async def scan_and_manage_network_alerts(db: Session):
 
     # Commit changes to the database
     db.commit()
+
+
+
 
