@@ -1,18 +1,17 @@
-
+# Import necessary modules
 import datetime
-from fastapi import FastAPI , Depends, HTTPException
-from db.database import SessionLocal, engine
-from models import models
-from schemas import schemas
+from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
+from .db.database import SessionLocal, engine
+from app.models import models
+from app.schemas import schemas
+from fastapi.staticfiles import StaticFiles
 
-
-
+# Create FastAPI instance
 app = FastAPI()
-
-models.Base.metadata.create_all(bind=engine)
-
-
+#app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 async def get_db():
     db = SessionLocal()
     try:
@@ -20,27 +19,43 @@ async def get_db():
     finally:
         db.close()
 
+# Create templates instance
+templates = Jinja2Templates(directory="templates")
 
-# ellam lab 
-@app.get("/labs")
-async def get_labs(db: Session = Depends(get_db)):
-    lab =db.query(models.LabInfo).all()
-    return  lab
-    
+@app.get("/", response_class=HTMLResponse)
+async def render_labs(request: Request):
+    try:
+        return templates.TemplateResponse("home.html", {"request": request})
+    except Exception as e:
+        print(f"Error rendering labs.html: {e}")
+        # Handle the error appropriately
+        return HTMLResponse(content="An error occurred while rendering home.html", status_code=500)
 
+@app.get("/labs", response_class=HTMLResponse)
+async def get_labs(request: Request, db: Session = Depends(get_db)):
+    try:
+        # Fetch labs from the database
+        labs = db.query(models.LabInfo).all()
 
+        # Render the HTML template with the fetched data
+        return templates.TemplateResponse("labs.html", {"request": request, "labs": labs})
+    except Exception as e:
+        print(f"Error rendering labs.html: {e}")
+        # Handle the error appropriately
+        return HTMLResponse(content="An error occurred while rendering labs.html", status_code=500)
+# ... your database setup and model definitions ...
 
 # endpoint to get a specific lab
-@app.get("/labs/{lab_id}", response_model=schemas.LabInfo)
-async def get_lab(lab_id: int, db: Session = Depends(get_db)):
+@app.get("/labs/{lab_id}",response_class=HTMLResponse)
+async def get_lab(request: Request,lab_id: int, db: Session = Depends(get_db)):
     lab = db.query(models.LabInfo).filter(models.LabInfo.Lab_ID == lab_id).first()
     if not lab:
         raise HTTPException(status_code=404, detail="Lab not found")
-    return lab
+    return templates.TemplateResponse("labChosen.html", {"request": request, "lab": lab})
 
 
 # endpoint to get all computers in a lab(error here)
-@app.get("/labs/{lab_id}/computers",response_model=schemas.ComputerInfo)
+@app.get("/labs/{lab_id}/computers", response_model=schemas.ComputerInfo)
 async def get_computers(lab_id: int, db: Session = Depends(get_db)):
     computers = db.query(models.ComputerInfo).filter(models.ComputerInfo.Lab_ID == lab_id).all()
     return computers
@@ -57,8 +72,9 @@ async def get_computer(lab_id: int, computer_id: int, db: Session = Depends(get_
     return computer
 
 
+
 # endpoint to get network information for a lab
-@app.get("/labs/{lab_id}/network", response_model=schemas.NetworkInfo)
+@app.get("/labs/{lab_id}/network", response_class=HTMLResponse)
 async def get_network_info(lab_id: int, db: Session = Depends(get_db)):
     network_info = db.query(models.NetworkInfo).filter(models.NetworkInfo.Lab_ID == lab_id).first()
     if not network_info:
@@ -222,7 +238,4 @@ async def scan_and_manage_network_alerts(db: Session):
 
     # Commit changes to the database
     db.commit()
-
-
-
 
