@@ -18,19 +18,30 @@
             margin-bottom: 20px;
         }
 
-        table {
-            width: 50%;
-            border-collapse: collapse;
+        .lab-details {
+            display: flex;
+            gap: 20px;
             margin-top: 20px;
-            text-align: center;
         }
 
-        th, td {
+        .lab-details p {
             padding: 8px;
         }
 
-        th {
-            background-color: #f2f2f2;
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -38,19 +49,33 @@
 
 <h1>Lab Information</h1>
 
-<!-- Display lab details in a table -->
-<table>
-    <tbody>
-        <tr>
-            <th>Lab ID</th>
-            <td>{{ lab.Lab_ID }}</td>
-        </tr>
-        <tr>
-            <th>Lab Name</th>
-            <td>{{ lab.Lab_Name }}</td>
-        </tr>
-    </tbody>
-</table>
+<!-- Display lab details side by side -->
+<div class="lab-details">
+    <p><strong>Lab ID:</strong> {{ lab.Lab_ID }}</p>
+    <p><strong>Lab Name:</strong> {{ lab.Lab_Name }}</p>
+</div>
+
+<!-- Buttons for Computers and Network Info -->
+<div class="button-container">
+    <button onclick="goToComputers()">Computer Info</button>
+    <button onclick="goToNetworkInfo()">Network Info</button>
+</div>
+
+<script>
+    // Functions to handle button clicks
+    function goToComputers() {
+        // Add your logic to handle the "Computers" button click
+        window.location.href = `http://127.0.0.1:8000/labs/${labId}/computers`;
+    }
+
+    function goToNetworkInfo() {
+        // Add your logic to handle the "Network Info" button click
+        window.location.href = `http://127.0.0.1:8000/labs/${labId}/network`;
+    }
+</script>
+
+
+   
 
 </body>
 </html>

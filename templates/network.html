@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2; /* Light gray background */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color:black; /* Indigo color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 70%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: linear-gradient(to right,#F2A456, #EB7D10); /* Gradient from purple to blue */
+            color: #fff;
+            text-align: left;
+            padding: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Network Information</h1>
+    <table>
+        <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td><strong>Network ID:</strong></td>
+            <td>{{ network_data.Network_ID }}</td>
+        </tr>
+        <tr>
+            <td><strong>Lab ID:</strong></td>
+            <td>{{ network_data.Lab_ID }}</td>
+        </tr>
+        <tr>
+            <td><strong>Network Name:</strong></td>
+            <td>{{ network_data.Network_Name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Network Status:</strong></td>
+            <td>{{ network_data.Network_Status }}</td>
+        </tr>
+        <tr>
+            <td><strong>Last Check:</strong></td>
+            <td>{{ network_data.Last_Check }}</td>
+        </tr>
+    </table>
+</body>
+</html>
