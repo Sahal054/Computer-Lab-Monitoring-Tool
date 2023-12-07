@@ -33,29 +33,29 @@
 </head>
 <body>
 
-<h1>Lab Details</h1>
+<h1>Device Details</h1>
 
 <!-- Display lab details in a table -->
 <table>
     <thead>
         <tr>
-            <th>Lab ID</th>
-            <th>Lab Name</th>
-            <th>Location</th>
-            <th>Capacity</th>
-            <th>Action</th>
+            <th>Computer ID</th>
+            <th>Computer Name</th>
+            <th>Computer Status</th>
+            <th>last Heartbeat</th>
+            
         </tr>
     </thead>
     <tbody>
         {% for computer in computers %}
             <tr>
-                <td>{{ computers.Computer_ID }}</td>
-                <td>{{ computers. Computer_Name }}</td>
-                <td>{{ computers.Computer_Status }}</td>
-                <td>{{ computers.Last_Heartbeat }}</td>
+                <td>{{ computer.Computer_ID }}</td>
+                <td>{{ computer. Computer_Name }}</td>
+                <td>{{ computer.Computer_Status }}</td>
+                <td>{{ computer.Last_Heartbeat }}</td>
                 <!--<td><button onclick="">Choose</button></td>-->
                 <td>
-                    <button onclick="chooseLab('{{ lab.Lab_ID }}')">Choose</button>
+                    
                 </td>
             </tr>
         {% endfor %}
@@ -66,7 +66,7 @@
     // Function to handle lab selection
     function chooseLab(labId) {
         // Redirect to the FastAPI endpoint with the chosen Lab_ID
-        window.location.href = `http://127.0.0.1:8000/labs/${labId}`;
+        
     }
 </script>
 

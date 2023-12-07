@@ -13,7 +13,7 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
-            font-family:  sans-serif;
+            font-family: sans-serif;
         }
 
         h1 {
@@ -68,6 +68,25 @@
         .network-button {
             background: linear-gradient(to right, #3498db, #2980b9);
         }
+
+        /* Alert button styles */
+        .alert-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+            transition: all 0.3s ease;
+        }
+
+        .alert-button:hover {
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -80,15 +99,23 @@
     <p><strong>Lab Name:</strong> {{ lab.Lab_Name }}</p>
 </div>
 
+<!-- Alert Button in the Top Right Corner -->
+<button class="alert-button" onclick="showAlert()">Alert!</button>
+
 <!-- Buttons for Computers and Network Info -->
 <div class="button-container">
-    <button class="gradient-button computer-button" onclick="goToComputers('{{lab.Lab_ID}}')">Computer Info</button>
-    <button class="gradient-button network-button" onclick="goToNetworkInfo('{{lab.Lab_ID}}')">Network Info</button>
+    <button class="gradient-button computer-button" onclick="goToComputers('{{ lab.Lab_ID }}')">Computer Info</button>
+    <button class="gradient-button network-button" onclick="goToNetworkInfo('{{ lab.Lab_ID }}')">Network Info</button>
 </div>
 
 <script>
+    // Function to handle alert button click
+    function showAlert() {
+        alert("This is an alert!");
+    }
+
     // Functions to handle button clicks
-    function goToComputers() {
+    function goToComputers(labId) {
         // Add your logic to handle the "Computers" button click
         window.location.href = `http://127.0.0.1:8000/labs/${labId}/computers`;
     }
@@ -101,4 +128,3 @@
 
 </body>
 </html>
-
