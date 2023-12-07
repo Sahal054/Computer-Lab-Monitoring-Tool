@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import List
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -44,3 +45,13 @@ class Alerts(BaseModel):
     Alert_Type: str
     Alert_Description: str
     Alert_Timestamp: str
+
+class LabWithAlerts(BaseModel):
+    lab_info: LabInfo
+    alerts: List[Alerts]
+
+class NetworkAlertStatus(BaseModel):
+    alert_status: str
+    alert_message: str
+
+

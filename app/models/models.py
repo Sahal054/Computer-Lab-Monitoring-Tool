@@ -1,7 +1,7 @@
 
 from sqlalchemy import Column, Integer, MetaData, String, Enum, DateTime, ForeignKey, Text
 from datetime import datetime
-from app.db.database import Base
+from db.database import Base
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -18,7 +18,7 @@ class ComputerInfo(Base):
     Computer_ID: int = Column(Integer, primary_key=True, autoincrement=True)
     Lab_ID: int = Column(Integer, ForeignKey(LabInfo.Lab_ID), nullable=False)
     Computer_Name: str = Column(String(255), nullable=False)
-    Computer_Status: str = Column(Enum('available', 'in_use'), nullable=False)
+    Computer_Status: str = Column(String(255), nullable=False)
     Last_Heartbeat: DateTime = Column(DateTime,default=datetime.utcnow)
 
 class NetworkInfo(Base):
@@ -26,7 +26,7 @@ class NetworkInfo(Base):
     Network_ID: int = Column(Integer, primary_key=True, autoincrement=True)
     Lab_ID: int = Column(Integer, ForeignKey(LabInfo.Lab_ID), nullable=False)
     Network_Name: str = Column(String(255), nullable=False)
-    Network_Status: str = Column(Enum('up', 'down'), nullable=False)
+    Network_Status: str = Column(String(255), nullable=False)
     Last_Check: DateTime = Column(DateTime,default=datetime.utcnow)
 
 class SoftwareInfo(Base):
@@ -44,7 +44,7 @@ class Alerts(Base):
     Network_ID: int = Column(Integer, ForeignKey(NetworkInfo.Network_ID))
     Alert_Type: str = Column(String(255), nullable=False)
     Alert_Description: str = Column(Text, nullable=False)
-    Alert_Timestamp: DateTime = Column(DateTime, nullable=False)
+    Alert_Timestamp: DateTime = Column(DateTime, default=datetime.utcnow)
     
 
 
